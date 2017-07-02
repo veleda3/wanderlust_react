@@ -1,14 +1,24 @@
-import React, {Component} from 'react';
+import React, {Component, PropTypes} from 'react';
 import {reduxForm} from 'redux-form';
 import {createTrip} from '../actions/index'
 
 class NewTrip extends Component{
+
+  static contextTypes = {
+    router: PropTypes.object
+  }
+  onSubmit(props){
+
+    this.props.createTrip(props).then(() => {
+      this.context.router.push('/')
+    })
+  }
   render(){
     const {fields:{budget, origin, date, passengers}, handleSubmit} = this.props;
     return(
       <div>
         <h1> Create a new trip </h1>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
           <div className ="form-group">
             <label> budget </label>
           <input type="text" className="form-control" {...budget} />
@@ -29,5 +39,5 @@ class NewTrip extends Component{
 
 export default reduxForm({
  form: 'NewtripForm',
- fields: ['budget', 'origin', 'date', 'passengers', 'booked?', 'user_id']
+ fields: ['budget', 'origin', 'date', 'passengers']
 },null, {createTrip})(NewTrip);

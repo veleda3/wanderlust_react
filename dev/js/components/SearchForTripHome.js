@@ -10,6 +10,16 @@ class SearchForTripHome extends Component{
     this.props.getSearchForTrips()
   }
 
+  // renderTrips(){
+
+  //   return this.props.trips.map((trip) => {
+  //     return (
+  //       <li key={trip.id}>
+  //         <h4> {trip.budget} </h4>
+  //       </li>
+  //     )
+  //   })
+  // }
   render(){
     return(
       <div className="container">
@@ -18,9 +28,16 @@ class SearchForTripHome extends Component{
           Create trip
           </Link>
         </div>
+        <ul>
+
+        </ul>
       </div>
       )
   }
+}
+
+function mapStateToProps(state){
+  return { trips: state.trips.all }
 }
 
 export default connect(null,  {getSearchForTrips: getSearchForTrips})(SearchForTripHome)
