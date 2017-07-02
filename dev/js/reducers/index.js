@@ -1,8 +1,10 @@
 import {combineReducers} from 'redux';
-import savedTripsReducer from './saved_trips_reducer';
+import TripsReducer from './trips_reducer';
+import {reducer as formReducer} from 'redux-form'
 
 const allReducers = combineReducers({
-    Trips: savedTripsReducer
+    Trips: TripsReducer,
+    form: formReducer
 });
 
 export default allReducers

@@ -1,1 +1,1 @@
-export const GET_SEARCHFORTRIPS = "GET_SEARCHFORTRIPS"
+export const GET_TRIPS = "GET_TRIPS"
