@@ -13,6 +13,7 @@ export function getSearchForTrips() {
 }
 
 export function createTrip(props) {
+ de
   const request = axios.post(`${API_URL}/trips`, props)
 
   return{

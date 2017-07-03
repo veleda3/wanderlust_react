@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import NavigationBar from './navigationBar';
 
 require('../../scss/style.scss');
 
@@ -6,12 +7,12 @@ class App extends Component{
   render(){
     return(
     <div>
-        <h2>login</h2>
-        Navbar
+        <div className="container">
+        <NavigationBar />
+        </div>
         <hr />
         <h2>trip it</h2>
         {this.props.children}
-
     </div>
       )
   }
