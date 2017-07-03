@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {getSearchForTrips} from '../actions/index';
 import {Link} from 'react-router';
-
+import {bindActionCreators} from 'redux';
 
 
 class SearchForTripHome extends Component{
@@ -10,16 +10,15 @@ class SearchForTripHome extends Component{
     this.props.getSearchForTrips()
   }
 
-  // renderTrips(){
-
-  //   return this.props.trips.map((trip) => {
-  //     return (
-  //       <li key={trip.id}>
-  //         <h4> {trip.budget} </h4>
-  //       </li>
-  //     )
-  //   })
-  // }
+  renderTrips(){
+    return this.props.trips.map((trip) => {
+      return (
+        <li key={trip.id}>
+          <h4> {trip.budget} </h4>
+        </li>
+      )
+    })
+  }
   render(){
     return(
       <div className="container">
@@ -29,7 +28,7 @@ class SearchForTripHome extends Component{
           </Link>
         </div>
         <ul>
-
+          {this.renderTrips()}
         </ul>
       </div>
       )
@@ -37,7 +36,15 @@ class SearchForTripHome extends Component{
 }
 
 function mapStateToProps(state){
-  return { trips: state.trips.all }
+  return { trips: state.Trips.all }
 }
 
-export default connect(null,  {getSearchForTrips: getSearchForTrips})(SearchForTripHome)
+// export default connect(null, {getSearchForTrips: getSearchForTrips})(SearchForTripHome)
+
+function matchDispatchToProps(dispatch){
+    return bindActionCreators({getSearchForTrips: getSearchForTrips}, dispatch);
+}
+
+// We don't want to return the plain UserList (component) anymore, we want to return the smart Container
+//      > UserList is now aware of state and actions
+export default connect(mapStateToProps, matchDispatchToProps)(SearchForTripHome);
