@@ -2,7 +2,7 @@ import 'babel-polyfill';
 import React from 'react';
 import ReactDOM from "react-dom";
 import {Provider} from 'react-redux';
-import {createStore, applyMiddleware} from 'redux';
+import {createStore, applyMiddleware, compose} from 'redux';
 import thunk from 'redux-thunk';
 import promise from 'redux-promise';
 import createLogger from 'redux-logger';
@@ -14,7 +14,8 @@ import routes from './util/routes';
 const logger = createLogger();
 const store = createStore(
     allReducers,
-    applyMiddleware(thunk, promise, logger)
+    applyMiddleware(thunk, promise, logger),
+    window.devToolsExtensions ? window.devToolsExtensions() : f => f
 );
 
 ReactDOM.render(
