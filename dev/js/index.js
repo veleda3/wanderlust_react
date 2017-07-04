@@ -14,8 +14,10 @@ import routes from './util/routes';
 const logger = createLogger();
 const store = createStore(
     allReducers,
-    applyMiddleware(thunk, promise, logger),
-    window.devToolsExtensions ? window.devToolsExtensions() : f => f
+    compose(
+      applyMiddleware(thunk, promise, logger),
+      window.devToolsExtension ? window.devToolsExtension() : f => f
+    )
 );
 
 ReactDOM.render(
